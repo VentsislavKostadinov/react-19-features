@@ -48,3 +48,13 @@ export default tseslint.config({
   },
 })
 ```
+
+### `npm run dev`
+
+Runs the app in the development mode.\
+Open [http://localhost:5147](http://localhost:5147) to view it in your browser.
+
+### `npm run test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
