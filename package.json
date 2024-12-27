@@ -1,9 +1,9 @@
 {
-  "name": "https://ventsislavkostadinov.github.io/react-19-features",
+  "name": "react-19-features",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "./",
+  "homepage": "https://ventsislavkostadinov.github.io/react-19-features",
   "scripts": {
     "dev": "vite",
     "test": "vitest",
