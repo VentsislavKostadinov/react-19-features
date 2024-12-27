@@ -6,13 +6,14 @@ export const UpdateName = () => {
   const [body, setBody] = useState<string>("");
   const [response, setResponse] = useState<PostResponse | null>(null);
   const [isPending, startTransition] = useTransition();
+  const endpoint = import.meta.env.VITE_ENDPOINT;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     startTransition(async () => {
       try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+        const res = await fetch(endpoint + '/posts', {
           method: 'POST',
           body: JSON.stringify({
             title,

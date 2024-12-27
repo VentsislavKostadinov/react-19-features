@@ -1,22 +1,21 @@
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { PostResponse } from "../../../model/PostResponse";
 
-interface PostResponse {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-}
+export const ChangeName = () => {
+  const [formData, setFormData] = useState({ title: "", body: "" });
+  const endpoint = import.meta.env.VITE_ENDPOINT;
 
-const submitPost = async (
-    formData: FormData,
+  const submitPost = async (
+    title: string,
+    body: string,
     prevResponse: PostResponse | null
   ): Promise<PostResponse | null> => {
     try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      const res = await fetch(endpoint + "/posts", {
         method: "POST",
         body: JSON.stringify({
-          title: formData.get("title"),
-          body: formData.get("body"),
+          title,
+          body,
           userId: 1,
         }),
         headers: {
@@ -32,19 +31,24 @@ const submitPost = async (
       return data;
     } catch (error) {
       console.error("Error:", error);
-      return prevResponse; // Fallback to previous response if error occurs
+      return prevResponse;
     }
   };
 
-
-export const ChangeName = () => {
   const [response, submitPostAction, isPending] =
-    useActionState<PostResponse | null>(
-      //@ts-ignore
-      submitPost,
-      null
-    );
+    useActionState<PostResponse | null>(async (prevResponse) => {
+      return await submitPost(formData.title, formData.body, prevResponse);
+    }, null);
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <div>
@@ -53,13 +57,24 @@ export const ChangeName = () => {
         <div>
           <label>
             Title:
-            <input type="text" name="title" required />
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
           </label>
         </div>
         <div>
           <label>
             Body:
-            <textarea name="body" required />
+            <textarea
+              name="body"
+              value={formData.body}
+              onChange={handleChange}
+              required
+            />
           </label>
         </div>
         <button type="submit" disabled={isPending}>
