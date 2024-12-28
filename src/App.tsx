@@ -1,4 +1,5 @@
 import "./App.css";
+import { ToggleTheme } from "./components/actions/use/ToggleTheme";
 import { ChangeName } from "./components/actions/useActionState/ChangeName";
 import { InputUsername } from "./components/actions/useFormState/InputUsername";
 import { MessageThread } from "./components/actions/useOptimistic/InputUsernameOptimistic";
@@ -18,6 +19,9 @@ function App() {
      <br/>
      <code>useOptimistic() hook</code>
      <MessageThread />
+     <br />
+     <code>use() hook</code>
+     <ToggleTheme />
     </>
   )
 }
