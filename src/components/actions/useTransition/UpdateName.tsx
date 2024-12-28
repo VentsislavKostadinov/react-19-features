@@ -1,19 +1,19 @@
 import { FormEvent, useState, useTransition } from "react";
 import { PostResponse } from "../../../model/PostResponse";
+import { endpoint } from "../../../utils/endpoint";
 
 export const UpdateName = () => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [response, setResponse] = useState<PostResponse | null>(null);
   const [isPending, startTransition] = useTransition();
-  const endpoint = import.meta.env.VITE_ENDPOINT;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     startTransition(async () => {
       try {
-        const res = await fetch(endpoint + '/posts', {
+        const res = await fetch(endpoint, {
           method: 'POST',
           body: JSON.stringify({
             title,

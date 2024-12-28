@@ -1,9 +1,9 @@
 import { useActionState, useState } from "react";
 import { PostResponse } from "../../../model/PostResponse";
+import { endpoint } from "../../../utils/endpoint";
 
 export const ChangeName = () => {
   const [formData, setFormData] = useState({ title: "", body: "" });
-  const endpoint = import.meta.env.VITE_ENDPOINT;
 
   const submitPost = async (
     title: string,
@@ -11,7 +11,7 @@ export const ChangeName = () => {
     prevResponse: PostResponse | null
   ): Promise<PostResponse | null> => {
     try {
-      const res = await fetch(endpoint + "/posts", {
+      const res = await fetch(endpoint, {
         method: "POST",
         body: JSON.stringify({
           title,

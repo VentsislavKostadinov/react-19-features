@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { SubmitButton } from "./SubmitButton";
 import { PostResponse } from "../../../model/PostResponse";
+import { endpoint } from "../../../utils/endpoint";
 
 export const InputUsername = () => {
   const [response, setResponse] = useState<PostResponse | null>(null);
-  const endpoint = import.meta.env.VITE_ENDPOINT;
 
   const submitForm = async (formData: FormData) => {
     const title = formData.get("title") as string;
@@ -12,7 +12,7 @@ export const InputUsername = () => {
     const userid = formData.get("userid") as string;
 
     try {
-      const result = await fetch(endpoint + "/posts", {
+      const result = await fetch(endpoint, {
         method: "POST",
         body: JSON.stringify({ title, body, userid: parseInt(userid) }),
         headers: {
