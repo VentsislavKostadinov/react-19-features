@@ -33,7 +33,7 @@ export const InputUsername = () => {
 
   return (
     <div>
-      <h2>Submit Post - Async Action</h2>
+      <h2>Submit Post - useFormStatus()</h2>
       <form
         action={async (formData) => {
           await submitForm(formData);

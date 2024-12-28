@@ -39,6 +39,7 @@ export const MessageThread = () => {
 
   return (
     <div>
+      <h2>Submit Post - useOptimistic()</h2>
       {optimisticMessages.map((message, index) => (
         <div key={index}>
           {message.text}
